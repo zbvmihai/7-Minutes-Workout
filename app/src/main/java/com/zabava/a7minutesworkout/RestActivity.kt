@@ -48,11 +48,6 @@ class RestActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Toast.makeText(
-                    this@RestActivity,
-                    "Here now we will start the exercise",
-                    Toast.LENGTH_SHORT
-                ).show()
                 val intent = Intent(this@RestActivity, ExerciseActivity::class.java)
                 intent.putExtra("currentExercisePosition", currentExercisePosition)
                 startActivity(intent)
@@ -66,8 +61,7 @@ class RestActivity : AppCompatActivity() {
             restTimer?.cancel()
             restProgress = 0
         }
-        binding?.tvRestExercise?.text =
-            "Get Ready For ${exerciseList!![currentExercisePosition].getName()}"
+        binding?.tvUpcomingExerciseName?.text = exerciseList!![currentExercisePosition].getName()
         setRestProgressBar()
     }
 

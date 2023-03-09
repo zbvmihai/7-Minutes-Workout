@@ -71,6 +71,8 @@ class ExerciseActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this@ExerciseActivity, "Exercise Finished", Toast.LENGTH_SHORT)
                         .show()
+                    val i = Intent(this@ExerciseActivity,MainActivity::class.java)
+                    startActivity(i)
                 }
             }
         }.start()
