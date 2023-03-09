@@ -4,10 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Toast
 import com.zabava.a7minutesworkout.databinding.ActivityRestBinding
 
-private var binding: ActivityRestBinding? = null
+
 
 private var restTimer: CountDownTimer? = null
 private var restProgress = 0
@@ -15,8 +14,9 @@ private var restProgress = 0
 private var exerciseList: ArrayList<ExerciseModel>? = null
 private var currentExercisePosition = -1
 
-
+@Suppress("DEPRECATION")
 class RestActivity : AppCompatActivity() {
+    private var binding: ActivityRestBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRestBinding.inflate(layoutInflater)
@@ -39,7 +39,7 @@ class RestActivity : AppCompatActivity() {
 
     private fun setRestProgressBar() {
         binding?.progressBar?.progress = restProgress
-        restTimer = object : CountDownTimer(1000, 1000) {
+        restTimer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
                 binding?.progressBar?.max = 10

@@ -17,10 +17,10 @@
         />
 
     <TextView
-        android:id="@+id/tvRestExercise"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET READY FOR"
+        android:text="@string/get_ready_for"
         android:textSize="@dimen/default_button_text_size"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
@@ -57,7 +57,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:background="@drawable/item_ciruclar_color_accent_background"
+            android:background="@drawable/item_circular_color_accent_background"
             android:gravity="center">
 
             <TextView
@@ -67,7 +67,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:text="10"/>
+                android:text="@string/_10"/>
 
         </LinearLayout>
 
@@ -77,7 +77,7 @@
         android:id="@+id/tvUpcomingExercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upcoming Exercise:"
+        android:text="@string/upcoming_exercise"
         android:textSize="@dimen/default_button_text_size"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
         android:id="@+id/tvUpcomingExerciseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET READY FOR"
+        android:text="@string/get_ready_for"
         android:textSize="@dimen/default_button_text_size"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
