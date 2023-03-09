@@ -98,7 +98,8 @@ object Constants {
             )
         exerciseList.add(pushUpAndRotation)
 
-        val sidePlank = ExerciseModel(12,
+        val sidePlank = ExerciseModel(
+            12,
             "Side Plank",
             R.drawable.ic_side_plank,
             false,
