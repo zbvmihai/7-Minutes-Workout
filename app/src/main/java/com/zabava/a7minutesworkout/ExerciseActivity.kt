@@ -14,6 +14,9 @@ class ExerciseActivity : AppCompatActivity() {
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
 
+    private var exerciseList : ArrayList<ExerciseModel>? = null
+    private var currentExercisePosition = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityExerciseBinding.inflate(layoutInflater)
@@ -24,6 +27,8 @@ class ExerciseActivity : AppCompatActivity() {
         if (supportActionBar != null){
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
+
+        exerciseList = Constants.defaultExerciseList()
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
             onBackPressed()
@@ -80,7 +85,10 @@ class ExerciseActivity : AppCompatActivity() {
             override fun onFinish() {
                 Toast.makeText(this@ExerciseActivity, "Exercise Finished", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this@ExerciseActivity, MainActivity::class.java)
-                startActivity(intent)
+                currentExercisePosition++
+                if(currentExercisePosition == 11){
+                    startActivity(intent)
+                }
 
             }
         }.start()
