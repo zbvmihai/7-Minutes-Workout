@@ -32,7 +32,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         currentExercisePosition = intent.getIntExtra("currentExercisePosition", 0)
 
-        tts = TextToSpeech(this@ExerciseActivity, this@ExerciseActivity,"")
+        tts = TextToSpeech(this@ExerciseActivity, this@ExerciseActivity, "")
 
         setSupportActionBar(binding?.toolbarExercise)
 
@@ -43,7 +43,8 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         exerciseList = Constants.defaultExerciseList()
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
-            onBackPressed()
+            val i = Intent(this@ExerciseActivity, MainActivity::class.java)
+            startActivity(i)
         }
 
         speakOut(exerciseList!![currentExercisePosition!!].getName())
@@ -62,7 +63,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             restProgress = 0
         }
 
-        if (tts != null){
+        if (tts != null) {
             tts!!.stop()
             tts!!.shutdown()
         }
@@ -87,7 +88,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 } else {
                     Toast.makeText(this@ExerciseActivity, "Exercise Finished", Toast.LENGTH_SHORT)
                         .show()
-                    val i = Intent(this@ExerciseActivity,MainActivity::class.java)
+                    val i = Intent(this@ExerciseActivity, MainActivity::class.java)
                     startActivity(i)
                 }
             }
@@ -95,13 +96,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     override fun onInit(status: Int) {
-        if(status == TextToSpeech.SUCCESS){
+        if (status == TextToSpeech.SUCCESS) {
             val result = tts?.setLanguage(Locale.US)
 
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
-                Log.e("TTS","The language is not supported or missing!")
-                Toast.makeText(this, "Language is not supported or missing!", Toast.LENGTH_SHORT).show()
-            }else{
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "The language is not supported or missing!")
+                Toast.makeText(this, "Language is not supported or missing!", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 speakOut(exerciseList!![currentExercisePosition!!].getName())
             }
         } else {
@@ -110,7 +112,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
     }
 
-    private fun speakOut(text: String){
-        tts!!.speak(text, TextToSpeech.QUEUE_FLUSH,null,"")
+    private fun speakOut(text: String) {
+        tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 }

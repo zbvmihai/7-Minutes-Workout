@@ -3,8 +3,6 @@ package com.zabava.a7minutesworkout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
-import android.widget.Toast
 import com.zabava.a7minutesworkout.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,14 +15,11 @@ class MainActivity : AppCompatActivity() {
         binding?.flStart?.setOnClickListener {
             val intent = Intent(this, RestActivity::class.java)
             startActivity(intent)
-
         }
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
         binding = null
     }
 }

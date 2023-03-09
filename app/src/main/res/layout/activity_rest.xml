@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ExerciseActivity">
 
     <androidx.appcompat.widget.Toolbar
-        app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/toolbarExercise"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:theme="@style/ToolbarTheme"
         android:background="@color/white"
-        app:titleTextColor="@color/colorPrimary"
-        />
+        android:theme="@style/ToolbarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/colorPrimary" />
 
     <TextView
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/get_ready_for"
-        android:textSize="@dimen/default_button_text_size"
         android:textColor="@color/colorAccent"
+        android:textSize="@dimen/default_button_text_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/flProgressBar"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout
         android:id="@+id/flProgressBar"
@@ -36,8 +34,8 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/item_circular_color_accent_border"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarExercise">
 
         <ProgressBar
@@ -46,12 +44,12 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
+            android:background="@drawable/circular_progress_bar_gray"
+            android:indeterminate="false"
             android:max="10"
             android:progress="100"
-            android:rotation="-90"
-            android:background="@drawable/circular_progress_bar_gray"
             android:progressDrawable="@drawable/circular_progress_bar"
-            android:indeterminate="false"/>
+            android:rotation="-90" />
 
         <LinearLayout
             android:layout_width="60dp"
@@ -64,10 +62,10 @@
                 android:id="@+id/tvTimer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/_10"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
-                android:textStyle="bold"
-                android:text="@string/_10"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -78,27 +76,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/upcoming_exercise"
-        android:textSize="@dimen/default_button_text_size"
         android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/default_button_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/flProgressBar"
-        />
+        app:layout_constraintTop_toBottomOf="@id/flProgressBar" />
 
     <TextView
         android:id="@+id/tvUpcomingExerciseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/get_ready_for"
-        android:textSize="@dimen/default_button_text_size"
         android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/default_button_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUpcomingExercise"
-        />
-
-
-
+        app:layout_constraintTop_toBottomOf="@id/tvUpcomingExercise" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

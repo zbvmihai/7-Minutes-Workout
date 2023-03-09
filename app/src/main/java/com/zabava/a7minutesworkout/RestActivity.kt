@@ -7,7 +7,6 @@ import android.os.CountDownTimer
 import com.zabava.a7minutesworkout.databinding.ActivityRestBinding
 
 
-
 private var restTimer: CountDownTimer? = null
 private var restProgress = 0
 
@@ -30,7 +29,8 @@ class RestActivity : AppCompatActivity() {
         }
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
-            onBackPressed()
+            val i = Intent(this@RestActivity, MainActivity::class.java)
+            startActivity(i)
         }
 
         setupRestView()
