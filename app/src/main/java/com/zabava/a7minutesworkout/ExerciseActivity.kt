@@ -1,5 +1,6 @@
 package com.zabava.a7minutesworkout
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -36,10 +37,12 @@ class ExerciseActivity : AppCompatActivity() {
         restTimer = object: CountDownTimer(10000,1000){
             override fun onTick(millisUntilFinished: Long) {
                 restProgress++
+                binding?.progressBar?.max = 10
                 binding?.progressBar?.progress = 10 - restProgress
                 binding?.tvTimer?.text = (10 - restProgress).toString()
             }
             override fun onFinish() {
+                startExercise()
                 Toast.makeText(this@ExerciseActivity, "Here now we will start the exercise", Toast.LENGTH_SHORT).show()
             }
         }.start()
@@ -61,5 +64,25 @@ class ExerciseActivity : AppCompatActivity() {
             restProgress = 0
         }
         binding = null
+    }
+
+    private fun startExercise(){
+        restProgress = 0
+        binding?.tvTitle?.text = "Exercise Name"
+        binding?.progressBar?.progress = restProgress
+        restTimer = object: CountDownTimer(30000,1000){
+            override fun onTick(millisUntilFinished: Long) {
+                restProgress++
+                binding?.progressBar?.max = 30
+                binding?.progressBar?.progress = 30 - restProgress
+                binding?.tvTimer?.text = (30 - restProgress).toString()
+            }
+            override fun onFinish() {
+                Toast.makeText(this@ExerciseActivity, "Exercise Finished", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@ExerciseActivity, MainActivity::class.java)
+                startActivity(intent)
+
+            }
+        }.start()
     }
 }
