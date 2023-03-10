@@ -1,6 +1,7 @@
 package com.zabava.a7minutesworkout
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zabava.a7minutesworkout.databinding.ActivityExerciseBinding
+import com.zabava.a7minutesworkout.databinding.DialogCustomBackConfirmationBinding
 import java.util.*
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -52,7 +54,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         exerciseList = Constants.defaultExerciseList()
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
-            finish()
+            customDialogForBackButton()
         }
 
         setupRestView()
@@ -117,8 +119,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             e.printStackTrace()
         }
 
-        executor.schedule({speakOut(exerciseList!![currentExercisePosition].getName())},1000,
-            TimeUnit.MILLISECONDS)
+        executor.schedule(
+            { speakOut(exerciseList!![currentExercisePosition].getName()) }, 1000,
+            TimeUnit.MILLISECONDS
+        )
 
         exerciseProgress = 0
         binding?.flRest?.visibility = View.INVISIBLE
@@ -158,6 +162,21 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }.start()
     }
 
+    private fun customDialogForBackButton() {
+        val customDialog = Dialog(this)
+        val dialogBinding = DialogCustomBackConfirmationBinding.inflate(layoutInflater)
+        customDialog.setContentView(dialogBinding.root)
+        customDialog.setCanceledOnTouchOutside(false)
+        dialogBinding.btnYes.setOnClickListener {
+            this@ExerciseActivity.finish()
+        }
+        dialogBinding.btnNo.setOnClickListener {
+            customDialog.dismiss()
+        }
+        customDialog.show()
+
+    }
+
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
             val result = tts?.setLanguage(Locale.US)
@@ -177,9 +196,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         tts!!.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
-    private fun setupExerciseStatusRecyclerView(){
+    private fun setupExerciseStatusRecyclerView() {
         binding?.rvExerciseStatus?.layoutManager =
-            LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         exerciseAdapter = ExerciseStatusAdapter(exerciseList!!)
         binding?.rvExerciseStatus?.adapter = exerciseAdapter
@@ -207,6 +226,11 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             player!!.stop()
         }
         binding = null
+    }
+
+    override fun onBackPressed() {
+        customDialogForBackButton()
+
     }
 
 
