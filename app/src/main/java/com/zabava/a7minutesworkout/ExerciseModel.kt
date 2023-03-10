@@ -44,7 +44,7 @@ class ExerciseModel(
         return isSelected
     }
 
-    fun getIsSelected(isSelected: Boolean) {
+    fun setIsSelected(isSelected: Boolean) {
         this.isSelected = isSelected
     }
 }
