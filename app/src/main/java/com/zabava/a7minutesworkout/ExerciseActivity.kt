@@ -44,15 +44,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         setContentView(binding?.root)
 
         tts = TextToSpeech(this@ExerciseActivity, this@ExerciseActivity, "")
+        exerciseList = Constants.defaultExerciseList()
+
 
         setSupportActionBar(binding?.toolbarExercise)
 
         if (supportActionBar != null) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-
-        exerciseList = Constants.defaultExerciseList()
-
         binding?.toolbarExercise?.setNavigationOnClickListener {
             customDialogForBackButton()
         }
@@ -228,6 +227,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding = null
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         customDialogForBackButton()
 
