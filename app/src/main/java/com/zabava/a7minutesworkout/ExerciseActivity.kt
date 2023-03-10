@@ -1,12 +1,12 @@
 package com.zabava.a7minutesworkout
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.media.MediaPlayer
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
@@ -94,6 +94,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding?.tvRestTimer?.text = (10 - restProgress).toString()
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onFinish() {
                 currentExercisePosition++
 
@@ -144,6 +145,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             }
 
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun onFinish() {
                 exerciseList!![currentExercisePosition].setIsSelected(false)
                 exerciseList!![currentExercisePosition].setIsCompleted(true)
