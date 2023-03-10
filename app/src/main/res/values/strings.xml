@@ -4,4 +4,11 @@
     <string name="start">START</string>
     <string name="_10">10</string>
     <string name="get_ready_for">GET READY FOR</string>
+    <string name="exercise_image">Exercise Image</string>
+    <string name="upcoming_exercise">Upcoming Exercise:</string>
+    <string name="exercise_name">Exercise Name</string>
+    <string name="finish">Finish</string>
+    <string name="done_check">Done Check</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="you_have_completed_the_workout">You have completed the workout!</string>
 </resources>
