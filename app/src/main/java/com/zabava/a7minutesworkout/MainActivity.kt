@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RestActivity::class.java)
             startActivity(intent)
         }
+        
     }
 
     override fun onDestroy() {
