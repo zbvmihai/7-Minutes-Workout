@@ -1,15 +1,20 @@
 package com.zabava.a7minutesworkout
 
 import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.zabava.a7minutesworkout.databinding.ActivityExerciseBinding
 import java.util.*
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
@@ -25,6 +30,9 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentExercisePosition = -1
 
     private var tts: TextToSpeech? = null
+    private var player: MediaPlayer? = null
+
+    private val executor = Executors.newSingleThreadScheduledExecutor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +50,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         exerciseList = Constants.defaultExerciseList()
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
-            onBackPressed()
+            restTimer?.cancel()
+            exerciseTimer?.cancel()
+            val i = Intent(this@ExerciseActivity, MainActivity::class.java)
+            startActivity(i)
         }
 
         setupRestView()
@@ -58,12 +69,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         binding?.tvUpComingExerciseLabel?.visibility = View.VISIBLE
         binding?.tvUpComingExerciseName?.visibility = View.VISIBLE
 
-        binding?.tvUpComingExerciseName?.text = exerciseList!![currentExercisePosition +1].getName()
+        binding?.tvUpComingExerciseName?.text =
+            exerciseList!![currentExercisePosition + 1].getName()
 
         if (restTimer != null) {
             restTimer?.cancel()
             restProgress = 0
         }
+
         setRestProgressBar()
     }
 
@@ -86,7 +99,21 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun startExercise() {
 
-        speakOut(exerciseList!![currentExercisePosition].getName())
+        try {
+            val soundURI = Uri.parse(
+                "android.resource://com.zabava.a7minutesworkout/" +
+                        R.raw.app_src_main_res_raw_press_start
+            )
+            player = MediaPlayer.create(applicationContext, soundURI)
+            player?.isLooping = false
+            player?.start()
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        executor.schedule({speakOut(exerciseList!![currentExercisePosition].getName())},1000,
+            TimeUnit.MILLISECONDS)
 
         exerciseProgress = 0
         binding?.flRest?.visibility = View.INVISIBLE
@@ -108,14 +135,16 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding?.tvExerciseTimer?.text = (30 - exerciseProgress).toString()
             }
 
-            override fun onFinish() {
 
-                if (currentExercisePosition < exerciseList?.size!! -1){
+            override fun onFinish() {
+                if (currentExercisePosition < exerciseList?.size!! - 1) {
                     setupRestView()
-                }else{
-                    Toast.makeText(this@ExerciseActivity,
+                } else {
+                    Toast.makeText(
+                        this@ExerciseActivity,
                         "Congratulations! You have completed the 7 minutes workout.",
-                        Toast.LENGTH_SHORT).show()
+                        Toast.LENGTH_SHORT
+                    ).show()
                     val intent = Intent(this@ExerciseActivity, MainActivity::class.java)
                     startActivity(intent)
                 }
@@ -124,15 +153,13 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     override fun onInit(status: Int) {
-        if(status == TextToSpeech.SUCCESS) {
+        if (status == TextToSpeech.SUCCESS) {
             val result = tts?.setLanguage(Locale.US)
 
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "The language is not supported or missing!")
                 Toast.makeText(this, "Language is not supported or missing!", Toast.LENGTH_SHORT)
                     .show()
-            } else {
-                speakOut(exerciseList!![currentExercisePosition!!+1].getName())
             }
         } else {
             Log.e("TTS", "Initialization Failed!")
@@ -159,10 +186,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         if (tts != null) {
             tts!!.stop()
             tts!!.shutdown()
+
+        }
+
+        if (player != null) {
+            player!!.stop()
         }
         binding = null
     }
-
 
 
 }
