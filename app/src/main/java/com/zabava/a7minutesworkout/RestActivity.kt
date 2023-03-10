@@ -29,6 +29,7 @@ class RestActivity : AppCompatActivity() {
         }
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
+            restTimer?.cancel()
             val i = Intent(this@RestActivity, MainActivity::class.java)
             startActivity(i)
         }

@@ -1,9 +1,12 @@
 package com.zabava.a7minutesworkout
 
 import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.MediaStore.Audio.Media
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Toast
@@ -24,6 +27,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentExercisePosition: Int? = null
 
     private var tts: TextToSpeech? = null
+    private var player: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +47,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         exerciseList = Constants.defaultExerciseList()
 
         binding?.toolbarExercise?.setNavigationOnClickListener {
+            restTimer?.cancel()
             val i = Intent(this@ExerciseActivity, MainActivity::class.java)
             startActivity(i)
         }
@@ -68,9 +73,24 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             tts!!.shutdown()
         }
         binding = null
+
+        if (player != null)
+            player!!.stop()
     }
 
     private fun startExercise() {
+
+        try{
+            val soundURI = Uri.parse("android.resource://com.zabava.a7minutesworkout/" +
+                    R.raw.app_src_main_res_raw_press_start)
+            player = MediaPlayer.create(applicationContext,soundURI)
+            player?.isLooping = false
+            player?.start()
+
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+
         restProgress = 0
         binding?.progressBar?.progress = restProgress
         restTimer = object : CountDownTimer(30000, 1000) {
