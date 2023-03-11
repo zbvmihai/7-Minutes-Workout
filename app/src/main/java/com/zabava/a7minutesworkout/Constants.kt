@@ -8,32 +8,32 @@ object Constants {
         val jumpingJacks = ExerciseModel(
             1, "Jumping Jacks",
             R.drawable.ic_jumping_jacks,
-            false,
-            false
+            isCompleted = false,
+            isSelected = false
         )
         exerciseList.add(jumpingJacks)
 
         val wallSit = ExerciseModel(
             2, "Wall Sit",
             R.drawable.ic_wall_sit,
-            false,
-            false
+            isCompleted = false,
+            isSelected = false
         )
         exerciseList.add(wallSit)
 
         val pushUp = ExerciseModel(
             3, "Push Up",
             R.drawable.ic_push_up,
-            false,
-            false
+            isCompleted = false,
+            isSelected = false
         )
         exerciseList.add(pushUp)
 
         val abdominalCrunch = ExerciseModel(
             4, "Abdominal Crunch",
             R.drawable.ic_abdominal_crunch,
-            false,
-            false
+            isCompleted = false,
+            isSelected = false
         )
         exerciseList.add(abdominalCrunch)
 
@@ -42,8 +42,8 @@ object Constants {
                 5,
                 "Step-Up onto Chair",
                 R.drawable.ic_step_up_onto_chair,
-                false,
-                false
+                isCompleted = false,
+                isSelected = false
             )
         exerciseList.add(stepUpOnChair)
 
@@ -51,8 +51,8 @@ object Constants {
             6,
             "Squat",
             R.drawable.ic_squat,
-            false,
-            false
+            isCompleted = false,
+            isSelected = false
         )
         exerciseList.add(squat)
 
@@ -61,8 +61,8 @@ object Constants {
                 7,
                 "Triceps Dip On Chair",
                 R.drawable.ic_triceps_dip_on_chair,
-                false,
-                false
+                isCompleted = false,
+                isSelected = false
             )
         exerciseList.add(tricepsDipOnChair)
 
@@ -70,8 +70,8 @@ object Constants {
             8,
             "Plank",
             R.drawable.ic_plank,
-            false,
-            false
+            isCompleted = false,
+            isSelected = false
         )
         exerciseList.add(plank)
 
@@ -80,12 +80,17 @@ object Constants {
                 9,
                 "High Knees Running In Place",
                 R.drawable.ic_high_knees_running_in_place,
-                false,
-                false
+                isCompleted = false,
+                isSelected = false
             )
         exerciseList.add(highKneesRunningInPlace)
 
-        val lunges = ExerciseModel(10, "Lunges", R.drawable.ic_lunge, false, false)
+        val lunges = ExerciseModel(10,
+            "Lunges",
+            R.drawable.ic_lunge,
+            isCompleted = false,
+            isSelected = false
+        )
         exerciseList.add(lunges)
 
         val pushUpAndRotation =
@@ -93,16 +98,16 @@ object Constants {
                 11,
                 "Push up and Rotation",
                 R.drawable.ic_push_up_and_rotation,
-                false,
-                false
+                isCompleted = false,
+                isSelected = false
             )
         exerciseList.add(pushUpAndRotation)
 
         val sidePlank = ExerciseModel(12,
             "Side Plank",
             R.drawable.ic_side_plank,
-            false,
-            false
+            isCompleted = false,
+            isSelected = false
         )
         exerciseList.add(sidePlank)
 

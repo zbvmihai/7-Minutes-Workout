@@ -34,6 +34,7 @@
 
         <Button
             android:id="@+id/btnYes"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
@@ -42,11 +43,11 @@
             android:gravity="center"
             android:text="@string/yes"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnNo"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
@@ -55,7 +56,6 @@
             android:gravity="center"
             android:text="@string/no"
             android:textColor="@color/white"
-            android:textSize="16sp"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

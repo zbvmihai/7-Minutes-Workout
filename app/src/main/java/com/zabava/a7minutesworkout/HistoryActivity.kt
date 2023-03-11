@@ -1,12 +1,11 @@
 package com.zabava.a7minutesworkout
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zabava.a7minutesworkout.databinding.ActivityHistoryBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
@@ -31,10 +30,10 @@ class HistoryActivity : AppCompatActivity() {
         getAllCompletedDates(dao)
     }
 
-    private fun getAllCompletedDates(historyDAO: HistoryDAO){
+    private fun getAllCompletedDates(historyDAO: HistoryDAO) {
         lifecycleScope.launch {
-            historyDAO.fetchAllDates().collect{ allCompletedDatesList ->
-                if (allCompletedDatesList.isNotEmpty()){
+            historyDAO.fetchAllDates().collect { allCompletedDatesList ->
+                if (allCompletedDatesList.isNotEmpty()) {
                     binding?.tvHistory?.visibility = View.VISIBLE
                     binding?.rvHistory?.visibility = View.VISIBLE
                     binding?.tvNoDataAvailable?.visibility = View.INVISIBLE
@@ -42,7 +41,7 @@ class HistoryActivity : AppCompatActivity() {
                     binding?.rvHistory?.layoutManager = LinearLayoutManager(this@HistoryActivity)
 
                     val dates = ArrayList<String>()
-                    for (date in allCompletedDatesList){
+                    for (date in allCompletedDatesList) {
                         dates.add(date.date)
                     }
 
@@ -50,7 +49,7 @@ class HistoryActivity : AppCompatActivity() {
                     binding?.rvHistory?.adapter = historyAdapter
 
 
-                }else{
+                } else {
                     binding?.tvHistory?.visibility = View.GONE
                     binding?.rvHistory?.visibility = View.GONE
                     binding?.tvNoDataAvailable?.visibility = View.VISIBLE

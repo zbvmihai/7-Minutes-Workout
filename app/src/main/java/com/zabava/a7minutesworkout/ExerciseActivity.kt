@@ -143,7 +143,6 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
                 binding?.tvExerciseTimer?.text = (30 - exerciseProgress).toString()
             }
 
-
             @SuppressLint("NotifyDataSetChanged")
             override fun onFinish() {
 
@@ -232,6 +231,4 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         customDialogForBackButton()
 
     }
-
-
 }

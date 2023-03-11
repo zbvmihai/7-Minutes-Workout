@@ -1,8 +1,7 @@
 package com.zabava.a7minutesworkout
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.zabava.a7minutesworkout.databinding.ActivityFinishBinding
 import kotlinx.coroutines.launch
@@ -26,7 +25,7 @@ class FinishActivity : AppCompatActivity() {
         binding?.toolbarFinishActivity?.setNavigationOnClickListener {
             finish()
         }
-        binding?.btnFinish?.setOnClickListener{
+        binding?.btnFinish?.setOnClickListener {
             finish()
         }
 
@@ -40,9 +39,7 @@ class FinishActivity : AppCompatActivity() {
         val dateTime = c.time
 
         val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.getDefault())
-        val date =sdf.format(dateTime)
-
-
+        val date = sdf.format(dateTime)
 
         lifecycleScope.launch {
             historyDAO.insert(HistoryEntity(date))

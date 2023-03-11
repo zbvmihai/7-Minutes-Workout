@@ -15,5 +15,5 @@ interface HistoryDAO {
     suspend fun update(HistoryEntity: HistoryEntity)
 
     @Query("SELECT * FROM 'history-table'")
-    fun fetchAllDates():Flow<List<HistoryEntity>>
+    fun fetchAllDates(): Flow<List<HistoryEntity>>
 }

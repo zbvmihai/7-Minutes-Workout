@@ -6,17 +6,20 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.zabava.a7minutesworkout.databinding.ItemExerciseStatusBinding
 
-class ExerciseStatusAdapter(private val items: ArrayList<ExerciseModel>):
+class ExerciseStatusAdapter(private val items: ArrayList<ExerciseModel>) :
     RecyclerView.Adapter<ExerciseStatusAdapter.ViewHolder>() {
 
-        class ViewHolder(binding: ItemExerciseStatusBinding):
-            RecyclerView.ViewHolder(binding.root){
-                val tvItem = binding.tvItem
-            }
+    class ViewHolder(binding: ItemExerciseStatusBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        val tvItem = binding.tvItem
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(ItemExerciseStatusBinding.inflate(
-            LayoutInflater.from(parent.context),parent,false))
+        return ViewHolder(
+            ItemExerciseStatusBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
 
     }
 
@@ -24,15 +27,24 @@ class ExerciseStatusAdapter(private val items: ArrayList<ExerciseModel>):
         val model: ExerciseModel = items[position]
         holder.tvItem.text = model.getId().toString()
 
-        when{
-            model.getIsSelected() ->{
-                holder.tvItem.background = ContextCompat.getDrawable(holder.itemView.context,R.drawable.item_circular_thin_color_accent_border)
+        when {
+            model.getIsSelected() -> {
+                holder.tvItem.background = ContextCompat.getDrawable(
+                    holder.itemView.context,
+                    R.drawable.item_circular_thin_color_accent_border
+                )
             }
-            model.getIsCompleted() ->{
-                holder.tvItem.background = ContextCompat.getDrawable(holder.itemView.context,R.drawable.item_circular_color_accent_background)
+            model.getIsCompleted() -> {
+                holder.tvItem.background = ContextCompat.getDrawable(
+                    holder.itemView.context,
+                    R.drawable.item_circular_color_accent_background
+                )
             }
-            else ->{
-                holder.tvItem.background = ContextCompat.getDrawable(holder.itemView.context,R.drawable.item_circular_color_gray_background)
+            else -> {
+                holder.tvItem.background = ContextCompat.getDrawable(
+                    holder.itemView.context,
+                    R.drawable.item_circular_color_gray_background
+                )
             }
         }
     }
