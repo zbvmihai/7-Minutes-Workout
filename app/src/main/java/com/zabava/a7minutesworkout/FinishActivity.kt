@@ -3,7 +3,11 @@ package com.zabava.a7minutesworkout
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.zabava.a7minutesworkout.databinding.ActivityFinishBinding
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FinishActivity : AppCompatActivity() {
 
@@ -24,6 +28,24 @@ class FinishActivity : AppCompatActivity() {
         }
         binding?.btnFinish?.setOnClickListener{
             finish()
+        }
+
+        val dao = (application as WorkOutApp).db.historyDao()
+        addDateToDatabase(dao)
+    }
+
+    private fun addDateToDatabase(historyDAO: HistoryDAO) {
+
+        val c = Calendar.getInstance()
+        val dateTime = c.time
+
+        val sdf = SimpleDateFormat("dd MMM yyyy HH:mm:ss", Locale.getDefault())
+        val date =sdf.format(dateTime)
+
+
+
+        lifecycleScope.launch {
+            historyDAO.insert(HistoryEntity(date))
         }
     }
 }
